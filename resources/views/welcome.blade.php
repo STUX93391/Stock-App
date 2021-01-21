@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Stock Managment</title>
+
+        <!-- Fonts -->
+        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
+
+
+    </head>
+    <body>
+        <div class="py-5 text-center">
+            <h1 class=" text-danger">Stock Managment App</h1>
+            <div class="">
+                @if (Route::has('login'))
+                    <div class="">
+                        @auth
+                            <a href="{{ url('/dashboard') }}" class="btn btn-dark">Dashboard</a>
+                        @else
+                            <a href="{{ route('login') }}" class="btn btn-dark">Login</a>
+
+                            @if (Route::has('register'))
+                                <a href="{{ route('register') }}" class="btn btn-dark">Register</a>
+                            @endif
+                        @endauth
+                    </div>
+                @endif
+            </div>
+        </div>
+
+    </body>
+</html>
