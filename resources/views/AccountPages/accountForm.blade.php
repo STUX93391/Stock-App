@@ -69,7 +69,7 @@
                                 <span class="text-danger">{{ $errors->first('balance')}}</span>
                             @endif
                             <input type="numeric" size="10" name="balance" class="border form-control" value="{{old('balance')}}" ><br>
-                            <small class="">* Account balance must be at least <strong>Rs:10000</strong></small>
+                            <small class="">* Account balance must be at least <strong>Rs:1000</strong></small>
                         </div>
 
                         <label for="jointAcc" class="font-bold">Do you have a joint account?</label>

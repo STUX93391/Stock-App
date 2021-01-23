@@ -15,7 +15,7 @@
                     @if($errors->has('title'))
                         <span class="text-danger">{{$errors->first('title')}}</span>
                     @endif
-                    <input type="text" name="title" value="{{old('title')}}" class="border form-control"  required><br>
+                    <input type="text" name="title" value="{{old('title')}}" class="border form-control"  autofocus required><br>
                 </div>
 
                 <div class="form-group">
@@ -40,6 +40,22 @@
                         <span class="text-danger">{{$errors->first('qty')}}</span>
                     @endif
                     <input type="number" name="qty"  value="{{old('qty')}}" class="border form-control" required><br>
+                </div>
+
+                <div class="form-group">
+                    <label for="mfgDate" class="font-bold">Manfiguration Date</label><br>
+                    @if($errors->has('mfgDate'))
+                        <span class="text-danger">{{$errors->first('mfgDate')}}</span>
+                    @endif
+                    <input type="date" name="mfgDate"  value="{{old('mfgDate')}}" class="border form-control" required><br>
+                </div>
+
+                <div class="form-group">
+                    <label for="expiryDate" class="font-bold">Expiry Date</label><br>
+                    @if($errors->has('expiryDate'))
+                        <span class="text-danger">{{$errors->first('expiryDate')}}</span>
+                    @endif
+                    <input type="date" name="expiryDate" value="{{old('expiryDate')}}" class="border form-control" required><br>
                 </div>
 
                 <div class="form-group">

@@ -16,7 +16,7 @@
                         @if($errors->has('title'))
                                 <span class="text-danger">{{ $errors->first('title')}}</span>
                         @endif
-                        <input type="text" name="title" class="border form-control" placeholder="Enter business title." required><br>
+                        <input type="text" name="title" class="border form-control" placeholder="Enter business title." autofocus required><br>
                     </div>
 
                     <div class="form-group">

@@ -54,6 +54,8 @@ class ProductController extends Controller
             'price'=>'bail|required|numeric|min:10|max:100000',
             'sku'=>'bail|required|string|unique:products,sku',
             'qty'=>'bail|required|numeric|min:1|max:10000',
+            'mfgDate'=>'bail|required|min:1/1/2000|max:12/31/2050',
+            'expiryDate'=>'bail|required|min:1/1/2021|max:12/31/2050',
         ]);
         //Get account balance
         $accBalance=auth()->user()->business->account->balance;
@@ -70,7 +72,9 @@ class ProductController extends Controller
                 'pr_title'=>Str::lower($request->title),
                 'price'=>$request->price,
                 'sku'=>Str::upper($request->sku),
-                'quantity'=>$request->qty
+                'quantity'=>$request->qty,
+                'mfgDate'=>$request->mfgDate,
+                'expiryDate'=>$request->expiryDate,
             ]);
 
             //Decrementing the account balance after adding the product.

@@ -1,6 +1,6 @@
 <x-app-layout class="">
     <x-slot name="header">
-
+        <h2 class="">Add Branch</h2>
     </x-slot>
 
     <div class="container">
@@ -13,7 +13,7 @@
                     @if($errors->has('title'))
                         <span class="text-danger">{{$errors->first('title')}}</span>
                     @endif
-                    <input type="text" name="title" class="border form-control" placeholder="Enter branch title." required><br>
+                    <input type="text" name="title" class="border form-control" placeholder="Enter branch title." autofocus required><br>
                 </div>
 
                 <div class="form-group">

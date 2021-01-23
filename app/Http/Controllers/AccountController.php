@@ -46,7 +46,7 @@ class AccountController extends Controller
             'title'=>'bail|required|string',
             'type'=>'bail|required|string',
             'number'=>'bail|required|numeric|unique:accounts,number',
-            'balance'=>'bail|required|numeric|min:10000',
+            'balance'=>'bail|required|numeric|min:1000',
             'jointAcc'=>'bail|required|alpha',
             'terms'=>'bail|required|boolean',
         ]);

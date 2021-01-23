@@ -9,7 +9,7 @@ class Product extends Model
 {
     use HasFactory;
     public $timestamps=true;
-    protected $fillable=['business_id','branch_id','pr_title','sku','price','quantity'];
+    protected $fillable=['business_id','branch_id','pr_title','sku','price','quantity','mfgDate','expiryDate'];
 
     /**
      * Relation of the product with the branch.

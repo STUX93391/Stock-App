@@ -23,6 +23,8 @@ class CreateProductsTable extends Migration
             $table->string('sku')->unique();
             $table->bigInteger('price');
             $table->bigInteger('quantity');
+            $table->date('mfgDate');
+            $table->date('expiryDate');
             $table->timestamps();
         });
     }
