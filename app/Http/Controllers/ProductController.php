@@ -145,7 +145,8 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Product::find($id)->delete();
+        return redirect()->back()->with('success','Product deleted successfully.');
     }
 
     /**
@@ -166,7 +167,7 @@ class ProductController extends Controller
      * @param  mixed $id
      * @return void
      */
-    public function delete(Request $request,$id){
+    public function delete($id){
         Product::find($id)->delete();
         return redirect()->back()
                                 ->with('success','Product deleted successfully.');

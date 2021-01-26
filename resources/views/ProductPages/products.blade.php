@@ -30,8 +30,8 @@
                                 <td class="">{{$prod->sku}}</td>
                                 <td class="">{{$prod->quantity}}</td>
                                 <td class="">
-                                    <a href="{{route('product.edit',$prod->id,$br->id)}}" class="btn btn-primary">Edit</a>
-                                    <button class="btn btn-danger btn-flat remove-user" data-id="{{ $prod->id }}" data-action="{{ route('delete',$prod->id) }}"> Delete</button>
+                                    <a href="{{route('product.edit',$prod->id)}}" class="btn btn-dark">Edit</a>
+                                    <button class="btn btn-danger btn-flat remove" data-id="{{ $prod->id }}" data-action="{{ route('delete',$prod->id) }}"> Delete</button>
                                 </td>
                             </tr>
                         @endforeach
@@ -44,6 +44,5 @@
         @endif
     </div>
   </div>
-
 
 </x-app-layout>

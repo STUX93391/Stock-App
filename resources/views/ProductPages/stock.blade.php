@@ -6,7 +6,7 @@
         @if($prods->count())
             <table class="table table-hover" id="stockTable">
                 <thead class="thead-dark">
-                    <th class="col-sm-2">Product ID</th>
+                    <th class="">Product ID</th>
                     <th class="">Title</th>
                     <th class="">SKU</th>
                     <th class="">Price</th>

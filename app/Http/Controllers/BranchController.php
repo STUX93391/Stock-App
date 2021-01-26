@@ -62,14 +62,7 @@ class BranchController extends Controller
      */
     public function show($id)
     {
-        $branch=Branch::find($id);
-        if($branch->br_title == 'Main Branch'){
-            return redirect()->route('dashboard.index')->with('warning','Main Branch cannot be deleted.');
-        }else{
-            $branch->delete();
-            return redirect()->route('dashboard.index')->with('success',Str::ucfirst($branch->br_title).' deleted successfully');
-
-        }
+        //
     }
 
     /**
@@ -80,7 +73,7 @@ class BranchController extends Controller
      */
     public function edit($id)
     {
-        //
+        return 'ok';
     }
 
     /**
@@ -103,6 +96,12 @@ class BranchController extends Controller
      */
     public function destroy($id)
     {
-        //
-    }
+        $branch=Branch::find($id);
+        if($branch->br_title == 'Main Branch'){
+            return redirect()->route('dashboard.index')->with('warning','Main Branch cannot be deleted.');
+        }else{
+            $branch->delete();
+            return redirect()->route('dashboard.index')->with('success',Str::ucfirst($branch->br_title).' deleted successfully');
+
+        }    }
 }

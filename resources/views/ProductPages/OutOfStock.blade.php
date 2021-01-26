@@ -5,13 +5,13 @@
 
     <div class="container py-3">
         @if($products->count())
-            <table class="table table-hover">
+            <table class="table table-hover" id="outOfStockTable">
                 <thead class="thead-dark">
                     <th class="">ID</th>
                     <th class="">Title</th>
                     <th class="">SKU</th>
                     <th class="">Quantity</th>
-                    <th class="col-sm-3">Action</th>
+                    <th class="">Action</th>
                 </thead>
                 <tbody class="">
                     @foreach($products as $prod)

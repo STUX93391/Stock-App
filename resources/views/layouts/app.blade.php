@@ -17,11 +17,11 @@
         {{-- Datatable css --}}
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.css">
 
-        {{-- Sweet Alert Scripts start --}}
+        {{-- Sweet Alert --}}
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
-       {{-- sweet alert ends --}}
+
         @livewireStyles
 
         <!-- Scripts -->
@@ -63,6 +63,9 @@
 
         @livewireScripts
 
+        @stack('click')
+
+
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -85,10 +88,17 @@
         } );
     </script>
 
-    {{-- sweet alert --}}
+    {{-- Datatable script for Out of Stock table --}}
+    <script>
+        $(document).ready( function () {
+        $('#outOfStockTable').DataTable();
+        } );
+    </script>
+
+    {{-- Sweet Alert --}}
     <script type="text/javascript">
 
-        $("body").on("click",".remove-user",function(){
+        $("body").on("click",".remove",function(){
 
         var current_object = $(this);
 
@@ -137,6 +147,5 @@
 
     });
     </script>
-
     </body>
 </html>
