@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 class ProductController extends Controller
 {
@@ -52,7 +53,6 @@ class ProductController extends Controller
         $this->validate($request,[
             'title'=>'bail|required|string|unique:products,pr_title',
             'price'=>'bail|required|numeric|min:10|max:100000',
-            'sku'=>'bail|required|string|unique:products,sku',
             'qty'=>'bail|required|numeric|min:1|max:10000',
             'mfgDate'=>'bail|required|min:1/1/2000|max:12/31/2050',
             'expiryDate'=>'bail|required|min:1/1/2021|max:12/31/2050',
@@ -71,7 +71,7 @@ class ProductController extends Controller
                 'branch_id'=>$request->branch_id,
                 'pr_title'=>Str::lower($request->title),
                 'price'=>$request->price,
-                'sku'=>Str::upper($request->sku),
+                'sku'=>$this->skuGen($request->title),
                 'quantity'=>$request->qty,
                 'mfgDate'=>$request->mfgDate,
                 'expiryDate'=>$request->expiryDate,
@@ -126,6 +126,12 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request,[
+            'title'=>'required',
+            'price'=>'required',
+            'sku'=>'required',Rule::unique('products')->ignore($id),
+            'qty'=>'required|numeric|min:10|max:1000',
+        ]);
         $prod=Product::find($id);
         $prod->pr_title=$request->title;
         $prod->price=$request->price;
@@ -200,5 +206,24 @@ class ProductController extends Controller
         $prod->save();
 
         return redirect()->route('product.index');
+    }
+
+    /**
+     * Generate sku based on the title.
+     *
+     * @param  mixed $string
+     * @param  mixed $l
+     * @return void
+     */
+    private function skuGen($string, $l = 10){
+        $results = ''; // empty string
+        $vowels = array('a', 'e', 'i', 'o', 'u', 'y'); // vowels
+        preg_match_all('/[A-Z][a-z]*/', ucfirst($string), $m); // Match every word that begins with a capital letter, added ucfirst() in case there is no uppercase letter
+        foreach($m[0] as $substring){
+            $substring = str_replace($vowels, '', strtolower($substring)); // String to lower case and remove all vowels
+            $results .= preg_replace('/([a-z]{'.$l.'})(.*)/', '$1', $substring); // Extract the first N letters.
+        }
+        $results=$results.'-'.rand(1,1000);
+        return $results;
     }
 }

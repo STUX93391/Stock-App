@@ -6,7 +6,8 @@
         @if($prods->count())
             <table class="table table-hover" id="stockTable">
                 <thead class="thead-dark">
-                    <th class="">Product ID</th>
+                    <th class=""> #</th>
+                    <th class="">Branch ID</th>
                     <th class="">Title</th>
                     <th class="">SKU</th>
                     <th class="">Price</th>
@@ -16,6 +17,7 @@
                         @foreach($prods as $prod)
                             <tr class="">
                                 <td class="">{{$prod->id}}</td>
+                                <td class="">{{$prod->branch_id}}</td>
                                 <td class="">{{Str::title($prod->pr_title)}}</td>
                                 <td class="">{{$prod->sku}}</td>
                                 <td class="">Rs {{$prod->price}}</td>
@@ -30,4 +32,13 @@
             </div>
         @endif
     </div>
+
+    @push('script')
+        {{-- Datatable script for stock table --}}
+        <script>
+            $(document).ready( function () {
+            $('#stockTable').DataTable();
+            } );
+        </script>
+    @endpush
 </x-app-layout>

@@ -7,7 +7,7 @@
         @if($products->count())
             <table class="table table-hover" id="outOfStockTable">
                 <thead class="thead-dark">
-                    <th class="">ID</th>
+                    <th class="">#</th>
                     <th class="">Title</th>
                     <th class="">SKU</th>
                     <th class="">Quantity</th>
@@ -32,4 +32,13 @@
         @endif
         {{$products->links()}}
     </div>
+
+    @push('script')
+        {{-- Datatable script for Out of Stock table --}}
+        <script>
+            $(document).ready( function () {
+            $('#outOfStockTable').DataTable();
+            } );
+        </script>
+    @endpush
 </x-app-layout>

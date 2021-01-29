@@ -8,6 +8,7 @@ use App\Http\Controllers\BranchController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
 use App\Http\Livewire\DeleteProduct;
+use App\Http\Livewire\EditBranchModal;
 use App\Models\Branch;
 
 /*
@@ -36,6 +37,8 @@ Route::group(['middleware'=>'auth:sanctum','verified'],function(){
     Route::resource('branch',BranchController::class);
     // Route for deleting a branch
     Route::delete('deletebranch/{id}',[BranchController::class,'destroy'])->name('deleteBranch');
+
+
     Route::resource('product',ProductController::class);
     //Route for adding a product
     Route::get('prod-form/{id}',[ProductController::class,'addProd'])->name('prodForm');

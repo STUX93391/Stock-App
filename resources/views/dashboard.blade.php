@@ -23,7 +23,6 @@
                                 <li class=""><strong>Branch Code: </strong>{{$branch->code}}</li>
                             </ul>
                                 <a href="{{route('product.show',$branch->id)}}" class="btn btn-dark">View Products</a>
-                                <a href="{{route('branch.show',$branch->id)}}" onclick="confirm('Are you sure')" class="btn btn-danger">Delete</a>
                                 <button class="btn btn-danger btn-flat remove" data-id="{{ $branch->id }}" data-action="{{ route('deleteBranch',$branch->id) }}"> Delete</button>
                             </div>
                       </div>

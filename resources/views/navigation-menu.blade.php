@@ -9,23 +9,31 @@
                         <x-jet-application-mark class="block w-auto h-9" />
                     </a>
                 </div>
+                @php
+                    $user=auth()->user()->regProcess;
+                    $stage=$user->stage;
+                @endphp
+                    @if($stage==2)
+                        <!-- Navigation Links -->
+                        <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                            <x-jet-nav-link href="{{ route('dashboard.index') }}" :active="request()->routeIs('dashboard.index')">
+                                {{ __('Home') }}
+                            </x-jet-nav-link>
+                            <x-jet-nav-link href="{{ route('product.create') }}" :active="request()->routeIs('product.create')">
+                                {{ __('Stock') }}
+                            </x-jet-nav-link>
+                            <x-jet-nav-link href="{{ route('product.index') }}" :active="request()->routeIs('product.index')">
+                                {{ __('Out of Stock') }}
+                            </x-jet-nav-link>
+                            <x-jet-nav-link href="{{ route('account.create') }}" :active="request()->routeIs('account.create')">
+                                {{ __('Account Info') }}
+                            </x-jet-nav-link>
+                        </div>
 
-                <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('dashboard.index') }}" :active="request()->routeIs('dashboard.index')">
-                        {{ __('Business') }}
-                    </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ route('product.create') }}" :active="request()->routeIs('product.create')">
-                        {{ __('Stock') }}
-                    </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ route('product.index') }}" :active="request()->routeIs('product.index')">
-                        {{ __('Out of Stock') }}
-                    </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ route('account.create') }}" :active="request()->routeIs('account.create')">
-                        {{ __('Account Info') }}
-                    </x-jet-nav-link>
-                </div>
             </div>
+
+
+
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 <!-- Teams Dropdown -->
@@ -131,6 +139,12 @@
                     </x-jet-dropdown>
                 </div>
             </div>
+
+            @else
+                <div class="flex items-center flex-shrink-0">
+                    <h3 ><strong>&nbsp Stock Managment App</strong></h3>
+                </div>
+            @endif
 
             <!-- Hamburger -->
             <div class="flex items-center -mr-2 sm:hidden">

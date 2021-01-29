@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Branch;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Str;
 
 class BranchController extends Controller
@@ -73,7 +74,12 @@ class BranchController extends Controller
      */
     public function edit($id)
     {
-        return 'ok';
+        $branch=Branch::find($id);
+        if($branch->br_title!="Main Branch"){
+            return view('BranchPages.eidtBranch')->with('branch',$branch);
+        }else{
+            return redirect()->back()->with('warning','Main Branch cannot be edited.');
+        }
     }
 
     /**
@@ -85,7 +91,19 @@ class BranchController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,[
+            'title'=>'required',
+            'address'=>'required',
+            'code'=>'required',Rule::unique('branches')->ignore($id),
+        ]);
+
+            $branch=Branch::find($id);
+                $branch->br_title=$request->title;
+                $branch->address=$request->address;
+                $branch->code=$request->code;
+                $branch->save();
+                return redirect()->route('dashboard.index')->with('success',$branch->br_title.' edited successfully.');
+
     }
 
     /**

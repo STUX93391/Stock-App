@@ -8,7 +8,7 @@
     <div class="container">
         <div class="container">
             <div class="px-4 py-3 mx-auto mt-5 bg-white rounded-lg shadow-lg col-lg-6">
-                <form action="{{route('account.store')}}" method="POST" class="form">
+                <form action="{{route('account.store')}}" method="POST" name="myform">
                         @csrf
 
                         <div class="form-group">
@@ -60,7 +60,10 @@
                             @if($errors->has('number'))
                                 <span class="text-danger">{{ $errors->first('number')}}</span>
                             @endif
-                            <input type="numeric" size="10" id="number" name="number" class="border form-control" value="{{old('number')}}"><br>
+                            <div class="input-group">
+                                <input type="numeric" size="10" id="number" name="number" class="border form-control" value="{{old('number')}}" aria-describedby="genbtn" readonly><br>
+                                <input type="button" id="genbtn" class="btn btn-outline-dark" value="Generate" onclick="generate();" >
+                            </div>
                         </div>
 
                         <div class="form-group">
@@ -95,16 +98,20 @@
     </div>
 
 
-    {{-- <script class="">
-        function GetRandom() {
-            var elem = document.getElementById("number")
-            number=
-            var possible="0123456789"
-            for(var i=0;i<12;i++){
-                number += possible.charAt(Math.floor(Math.random()*possible.12))
-            }
-            return elem.value=number
-
+@push('script')
+<script>
+    function randomNumber(length){
+        var dig = "1234567890";
+        var num ="";
+        for (var x=0; x<length;x++){
+            var i = Math.floor(Math.random()*dig.length);
+            num += dig.charAt(i);
         }
-    </script> --}}
+        return num;
+    }
+    function generate(){
+        myform.number.value=randomNumber(10);
+    }
+ </script>
+@endpush
 </x-app-layout>

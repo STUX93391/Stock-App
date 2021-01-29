@@ -31,7 +31,7 @@
                     @if($errors->has('sku'))
                         <span class="text-danger">{{$errors->first('sku')}}</span>
                     @endif
-                    <input type="text" name="sku" class="border form-control" value="{{$prod->sku}}" required><br>
+                    <input type="text" name="sku" class="border form-control" value="{{$prod->sku}}" readonly><br>
                 </div>
 
                 <div class="form-group">
