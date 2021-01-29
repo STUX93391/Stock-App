@@ -47,7 +47,7 @@
                 </div>
             </div>
 
-            <footer class="mt-5 text-secondary bg-dark">
+            <footer class="absolute py-2 mt-5 text-secondary bg-dark">
                 <div class="container">
                 <h3 ><i>Contact</i></h3>
                     <ul class="">
@@ -59,6 +59,8 @@
                 </div>
             </footer>
         </div>
-
+           <!--/.footer-->
+       <p class="py-0 text-center"> Copyright © Stock Managment App 2020. All right reserved. </p>
+           <!--/.footer-bottom-->
     </body>
 </html>
