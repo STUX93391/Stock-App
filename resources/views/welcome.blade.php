@@ -47,9 +47,12 @@
                 </div>
             </div>
 
+        </div>
+           <!--/.footer-->
+
             <footer class="absolute py-2 mt-5 text-secondary bg-dark">
                 <div class="container">
-                <h3 ><i>Contact</i></h3>
+                    <h3 ><i>Contact</i></h3>
                     <ul class="">
                         <li class=""><h5 class="">email: _________</h5></li>
                         <li class=""><h5 class="">Fax: _________</h5></li>
@@ -58,9 +61,10 @@
 
                 </div>
             </footer>
-        </div>
-           <!--/.footer-->
-       <p class="py-0 text-center"> Copyright © Stock Managment App 2020. All right reserved. </p>
+
+           <div class="text-center">
+                <small> Copyright © Stock Managment App 2020. All right reserved. </small>
+           </div>
            <!--/.footer-bottom-->
     </body>
 </html>

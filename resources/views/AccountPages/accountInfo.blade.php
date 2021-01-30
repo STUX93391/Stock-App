@@ -2,13 +2,13 @@
     @livewire('deposit')
     @livewire('with-draw')
     <x-slot name="header">
-        <h3 class="">{{$acc->acc_title}}</h3>
+        <h3 class="">{{Str::title($acc->acc_title)}}</h3>
     </x-slot>
     <div class="py-3 ">
         <div class="container shadow card col-sm-6">
             <div class=" card-body">
                 <ul class="">
-                    <li class=""><strong class="">Account Owner: </strong>{{Str::ucfirst($user->name)}}</li>
+                    <li class=""><strong class="">Account Owner: </strong>{{Str::title($user->name)}}</li>
                     <li class=""><strong class="">Account Number: </strong>{{$acc->number}}</li>
                     <li class=""><strong class="">Account Type: </strong>{{$acc->type}}</li>
                     <li class=""><strong class="">Account Balance: </strong>Rs {{$acc->balance}}</li>

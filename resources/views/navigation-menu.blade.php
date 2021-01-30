@@ -6,7 +6,7 @@
                 <!-- Logo -->
                 <div class="flex items-center flex-shrink-0">
                     <a href="{{ route('dashboard.index') }}">
-                        <x-jet-application-mark class="block w-auto h-9" />
+                        <x-jet-application-mark class="block h-3" />
                     </a>
                 </div>
                 @php

@@ -2,7 +2,7 @@
   <x-slot name="header">
       <div class="">
             <h3 class="">
-                {{$br->br_title}}
+                {{Str::title($br->br_title)}}
                 <a href="{{route('prodForm',$br->id)}}" class="float-right btn btn-dark">Add Product</a>
 
             </h3>
