@@ -22,8 +22,16 @@
                             <ul class="card-list">
                                 <li class=""><strong>Branch Code: </strong>{{$branch->code}}</li>
                             </ul>
-                                <a href="{{route('product.show',$branch->id)}}" class="btn btn-dark">View Products</a>
-                                <button class="btn btn-danger btn-flat remove" data-id="{{ $branch->id }}" data-action="{{ route('deleteBranch',$branch->id) }}"> Delete</button>
+                                {{-- form for deletion of branch --}}
+                                <form action="{{route('branch.destroy',$branch->id)}}" method="Post">
+                                    {{-- View Products of branch button --}}
+                                    <a href="{{route('product.show',$branch->id)}}" class="btn btn-dark">View Products</a>
+
+                                    @csrf
+                                    @method('Delete')
+                                    <input type="submit" onclick="confirm('Confirm Delete !')" class="btn btn-danger" value="Delete">
+                                </form>
+                                {{-- form ends --}}
                             </div>
                       </div>
                 </div>
