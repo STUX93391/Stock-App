@@ -14,8 +14,16 @@ class Deposit extends Component
             'amount'=>'required|numeric|min:500|max:100000000'
         ]);
         auth()->user()->business->account->increment('balance',$validated['amount']);
+
+        //Create transaction for the cash deposit.
+        auth()->user()->business->transaction()->create([
+            'action'=>'Cash Deposit',
+            'amount'=>$this->amount
+        ]);
+
         $this->amount='';
         session()->flash('success','Rs'.$validated['amount'].' deposited successfully.');
+
         return redirect()->route('account.create');
     }
 }

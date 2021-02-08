@@ -6,8 +6,6 @@ use App\Models\Product;
 use App\Models\Branch;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
@@ -34,9 +32,6 @@ class ProductController extends Controller
      */
     public function create()
     {
-        // $userId=auth()->user()->id;
-        // $bus=User::find($userId)->business;
-        // $prods=$bus->product()->paginate(10);
         $prods=auth()->user()->business->product;
         return view('ProductPages.stock')
                                         ->with('prods',$prods);
@@ -79,6 +74,14 @@ class ProductController extends Controller
 
             //Decrementing the account balance after adding the product.
             auth()->user()->business->account->decrement('balance',$total);
+
+            //Create transaction for the product added above
+            auth()->user()->business->transaction()->create([
+                'action'=>'Product Purchased',
+                'description'=>$request->title,
+                'quantity'=>$request->qty,
+                'amount'=>$request->qty * $request->price
+            ]);
 
             return redirect()->route('product.show',$request->branch_id)->with('success','Product created successfully');
         }else{
@@ -139,20 +142,14 @@ class ProductController extends Controller
         $prod->quantity=$request->qty;
         $prod->save();
 
+        //Create transaction for the product updation
+        auth()->user()->business->transaction()->create([
+            'action'=>'Product Updated',
+            'description'=>$prod->pr_title,
+        ]);
+
         return redirect()->route('product.show',$prod->branch_id)
                                                             ->with('success',Str::ucfirst($prod->pr_title).' updated successfully.');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        Product::find($id)->delete();
-        return redirect()->back()->with('success','Product deleted successfully.');
     }
 
     /**
@@ -174,7 +171,15 @@ class ProductController extends Controller
      * @return void
      */
     public function delete($id){
-        Product::find($id)->delete();
+        $prod=Product::find($id);
+        $prod->delete();
+
+        //Create transaction for deletion of the product.
+        auth()->user()->business->transaction()->create([
+            'action'=>'Product Deleted',
+            'description'=>$prod->pr_title,
+        ]);
+
         return redirect()->back()
                                 ->with('success','Product deleted successfully.');
     }
@@ -204,6 +209,13 @@ class ProductController extends Controller
         $prod=Product::find($request->id);
         $prod->quantity=$request->quantity;
         $prod->save();
+
+        //Create transaction for the product quantity updation
+        auth()->user()->business->transaction()->create([
+            'action'=>'Quantity Updated',
+            'description'=>$prod->pr_title,
+            'quantity'=>$request->quantity
+        ]);
 
         return redirect()->route('product.index');
     }

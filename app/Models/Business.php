@@ -45,4 +45,22 @@ class Business extends Model
     public function user(){
         return $this->belongsTo(User::class);
     }
+
+    /**
+     * Relation of business with employees
+     *
+     * @return void
+     */
+    public function employee(){
+        return $this->hasMany(Employee::class);
+    }
+
+    /**
+     * Relation of business with transaction.
+     *
+     * @return void
+     */
+    public function transaction(){
+        return $this->hasMany(Transaction::class);
+    }
 }

@@ -21,16 +21,6 @@ class BranchController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Create new branch using eloquent relation for the business of authenticated user.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -52,18 +42,13 @@ class BranchController extends Controller
             'code'=>Str::upper($request->code)
         ]);
         $bus->refresh();
-        return redirect()->route('dashboard.index')->with('success','Branch created successfully');
-    }
 
-    /**
-     * Delete a branch with id except the Main branch.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        //Create transaction for creation of branch.
+        auth()->user()->business->transaction()->Create([
+            'action'=>$request->title.' created',
+        ]);
+
+        return redirect()->route('dashboard.index')->with('success','Branch created successfully');
     }
 
     /**
@@ -104,6 +89,10 @@ class BranchController extends Controller
                 $branch->save();
                 return redirect()->route('dashboard.index')->with('success',$branch->br_title.' edited successfully.');
 
+            //Create transaction for updating the branch
+            auth()->user()->business->transaction()->create([
+                'action'=>$branch->br_title.' updated'
+            ]);
     }
 
     /**
@@ -112,14 +101,20 @@ class BranchController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id){
         $branch=Branch::find($id);
         if($branch->br_title == 'Main Branch'){
             return redirect()->route('dashboard.index')->with('warning','Main Branch cannot be deleted.');
         }else{
             $branch->delete();
-            return redirect()->route('dashboard.index')->with('success',Str::ucfirst($branch->br_title).' deleted successfully');
 
-        }    }
+            //Create transaction for deleting the branch.
+            auth()->user()->business->transaction()->create([
+                'action'=>$branch->br_title.' deleted',
+            ]);
+
+            return redirect()->route('dashboard.index')->with('success',Str::ucfirst($branch->br_title).' deleted successfully');
+        }
+
+    }
 }

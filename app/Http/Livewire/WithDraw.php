@@ -17,6 +17,13 @@ class WithDraw extends Component
             if(($acc->balance-$validated['amount'])>500){
                 if($validated['amount']<$acc->balance){
                     auth()->user()->business->account->decrement('balance',$validated['amount']);
+
+                    //Create transaction for the cash withdraw.
+                    auth()->user()->business->transaction()->create([
+                    'action'=>'Cash Withdrawn',
+                    'amount'=>$this->amount
+                    ]);
+
                     $this->amount='';
                     session()->flash('success','Rs' .$validated['amount'].' withdrawn successfully !!');
                     return redirect()->route('account.create');

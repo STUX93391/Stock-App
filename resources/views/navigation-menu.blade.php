@@ -6,7 +6,7 @@
                 <!-- Logo -->
                 <div class="flex items-center flex-shrink-0">
                     <a href="{{ route('dashboard.index') }}">
-                        <x-jet-application-mark class="block h-3" />
+                        <x-jet-application-mark class="block h-1" />
                     </a>
                 </div>
                 @php
@@ -27,6 +27,12 @@
                             </x-jet-nav-link>
                             <x-jet-nav-link href="{{ route('account.create') }}" :active="request()->routeIs('account.create')">
                                 {{ __('Account Info') }}
+                            </x-jet-nav-link>
+                            <x-jet-nav-link href="{{ route('employees.index') }}" :active="request()->routeIs('employees.index')">
+                                {{ __('Employees') }}
+                            </x-jet-nav-link>
+                            <x-jet-nav-link href="{{ route('transaction.index') }}" :active="request()->routeIs('transaction.index')">
+                                {{ __('Transactions') }}
                             </x-jet-nav-link>
                         </div>
 

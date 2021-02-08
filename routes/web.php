@@ -1,15 +1,13 @@
 <?php
 
 use App\Http\Controllers\BusinessController;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ProductController;
-use App\Http\Livewire\DeleteProduct;
-use App\Http\Livewire\EditBranchModal;
-use App\Models\Branch;
+use App\Http\Controllers\TransactionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +34,8 @@ Route::group(['middleware'=>'auth:sanctum','verified'],function(){
     Route::resource('account', AccountController::class);
     Route::resource('branch',BranchController::class);
     Route::resource('product',ProductController::class);
+    Route::resource('employees',EmployeeController::class);
+    Route::resource('transaction',TransactionController::class);
     //Route for adding a product
     Route::get('prod-form/{id}',[ProductController::class,'addProd'])->name('prodForm');
     //Route for deleting a product
