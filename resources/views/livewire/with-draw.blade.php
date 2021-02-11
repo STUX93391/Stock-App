@@ -11,7 +11,7 @@
                       <form action="" method="">
                         <div class="form-group">
                             <label>Enter Amount</label>
-                            <input type="number" class="form-control" wire:model='amount' name="amount" >
+                            <input type="number" class="form-control"  wire:model='amount' name="amount" >
                             @if($errors->has('amount'))
                                       <span class="text-danger">{{ $errors->first('amount')}}</span>
                               @endif

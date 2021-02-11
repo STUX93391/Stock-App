@@ -10,7 +10,7 @@
                 <div class="modal-body">
                     <form  >
                         <div class="form-group">
-                            <input type="text" class="form-control" wire:model='name' name="name" placeholder="Enter name" >
+                            <input type="text" class="form-control" wire:model='name' name="name" placeholder="Enter name" autofocus>
                             @if($errors->has('name'))
                                         <span class="text-danger">{{ $errors->first('name')}}</span>
                             @endif

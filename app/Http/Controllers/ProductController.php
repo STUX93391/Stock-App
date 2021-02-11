@@ -47,8 +47,8 @@ class ProductController extends Controller
     {
         $this->validate($request,[
             'title'=>'bail|required|string|unique:products,pr_title',
-            'price'=>'bail|required|numeric|min:10|max:100000',
-            'qty'=>'bail|required|numeric|min:1|max:10000',
+            'price'=>'bail|required|integer|min:10|max:100000',
+            'qty'=>'bail|required|integer|min:1|max:10000',
             'mfgDate'=>'bail|required|min:1/1/2000|max:12/31/2050',
             'expiryDate'=>'bail|required|min:1/1/2021|max:12/31/2050',
         ]);
@@ -78,7 +78,7 @@ class ProductController extends Controller
             //Create transaction for the product added above
             auth()->user()->business->transaction()->create([
                 'action'=>'Product Purchased',
-                'description'=>$request->title,
+                'description'=>'Product Title: '.$request->title,
                 'quantity'=>$request->qty,
                 'amount'=>$request->qty * $request->price
             ]);
@@ -133,7 +133,7 @@ class ProductController extends Controller
             'title'=>'required',
             'price'=>'required',
             'sku'=>'required',Rule::unique('products')->ignore($id),
-            'qty'=>'required|numeric|min:10|max:1000',
+            'qty'=>'required|integer|min:10|max:1000',
         ]);
         $prod=Product::find($id);
         $prod->pr_title=$request->title;
@@ -145,7 +145,7 @@ class ProductController extends Controller
         //Create transaction for the product updation
         auth()->user()->business->transaction()->create([
             'action'=>'Product Updated',
-            'description'=>$prod->pr_title,
+            'description'=>'Product Title: '.$prod->pr_title,
         ]);
 
         return redirect()->route('product.show',$prod->branch_id)
@@ -177,7 +177,7 @@ class ProductController extends Controller
         //Create transaction for deletion of the product.
         auth()->user()->business->transaction()->create([
             'action'=>'Product Deleted',
-            'description'=>$prod->pr_title,
+            'description'=>'Product Title: '.$prod->pr_title,
         ]);
 
         return redirect()->back()
@@ -204,7 +204,7 @@ class ProductController extends Controller
      */
     public function updateQty(Request $request){
         $this->validate($request,[
-            'quantity'=>'bail|required|numeric|min:10|max:10000'
+            'quantity'=>'bail|required|integer|min:10|max:10000'
         ]);
         $prod=Product::find($request->id);
         $prod->quantity=$request->quantity;
@@ -213,7 +213,7 @@ class ProductController extends Controller
         //Create transaction for the product quantity updation
         auth()->user()->business->transaction()->create([
             'action'=>'Quantity Updated',
-            'description'=>$prod->pr_title,
+            'description'=>'Product Title: '.$prod->pr_title,
             'quantity'=>$request->quantity
         ]);
 

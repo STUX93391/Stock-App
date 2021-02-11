@@ -46,14 +46,7 @@ class Business extends Model
         return $this->belongsTo(User::class);
     }
 
-    /**
-     * Relation of business with employees
-     *
-     * @return void
-     */
-    public function employee(){
-        return $this->hasMany(Employee::class);
-    }
+
 
     /**
      * Relation of business with transaction.

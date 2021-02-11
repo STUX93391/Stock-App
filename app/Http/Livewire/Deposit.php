@@ -11,7 +11,7 @@ class Deposit extends Component
 
     public function depositCash(){
         $validated=$this->validate([
-            'amount'=>'required|numeric|min:500|max:100000000'
+            'amount'=>'required|integer|min:500|max:100000000'
         ]);
         auth()->user()->business->account->increment('balance',$validated['amount']);
 

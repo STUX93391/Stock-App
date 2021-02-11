@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Business;
 use App\Models\RegProcess;
 use App\Models\User;
-use App\Models\Branch;
 
 class BusinessController extends Controller
 {
@@ -24,8 +22,8 @@ class BusinessController extends Controller
             'title'=>'bail|required|string',
             'address'=>'bail|required|string',
             'email'=>'bail|required|email|unique:businesses,email',
-            'contact'=>'bail|required|numeric|unique:businesses,contact',
-            'type'=>'bail|required|string'
+            'contact'=>'bail|required|integer|unique:businesses,contact',
+            'type'=>'bail|required|alpha'
         ]);
 
 
@@ -55,6 +53,9 @@ class BusinessController extends Controller
             'code'=>'MB11',
             'address'=>$request->address,
         ]);
+
+        $user->business_id=$bus->id;
+        $user->save();
 
         //Create transaction for the business created above
         auth()->user()->business->transaction()->create([

@@ -45,8 +45,8 @@ class AccountController extends Controller
             'bank'=>'bail|required|string',
             'title'=>'bail|required|string',
             'type'=>'bail|required|string',
-            'number'=>'bail|required|numeric|unique:accounts,number',
-            'balance'=>'bail|required|numeric|min:1000',
+            'number'=>'bail|required|integer|unique:accounts,number',
+            'balance'=>'bail|required|integer|min:1000',
             'jointAcc'=>'bail|required|alpha',
             'terms'=>'bail|required|boolean',
         ]);
@@ -71,48 +71,4 @@ class AccountController extends Controller
         return redirect()->route('dashboard.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

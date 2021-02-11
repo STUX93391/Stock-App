@@ -10,7 +10,7 @@ class WithDraw extends Component
 
     public function withDraw(){
         $validated=$this->validate([
-            'amount'=>'required|numeric|min:500|max:100000000'
+            'amount'=>'required|integer|min:500|max:100000000'
         ]);
         $acc=auth()->user()->business->account;
         if($acc->balance>500){

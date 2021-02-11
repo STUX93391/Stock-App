@@ -14,21 +14,27 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $userId=auth()->user()->id;
-        //Get the registration stage of the user.
-        $regStage=User::find($userId)->regProcess;
-        $stage=$regStage->stage;
+        $user=auth()->user();
+        if($user->status == 'owner'){
+            //Get the registration stage of the user.
+            $regStage=User::find($user->id)->regProcess;
+            $stage=$regStage->stage;
 
-        if($stage==0){                     // If user is on stage 0(just registered) return business registration form.
-            return view('BusinessPages.busForm');
-        }elseif($stage==1){                //User has registered the business now return account registration form.
-            return view('AccountPages.accountForm');
+            if($stage==0){                     // If user is on stage 0(just registered) return business registration form.
+                return view('BusinessPages.busForm');
+            }elseif($stage==1){                //User has registered the business now return account registration form.
+                return view('AccountPages.accountForm');
+            }
+            else{                               //User has business and account return dashboard.
+                $bus=User::find($user->id)->business;
+                $branches=$bus->branch;
+                return view('dashboard')->with('branches',$branches);
+            }
         }
-        else{                               //User has business and account return dashboard.
-            $bus=User::find($userId)->business;
-            $branches=$bus->branch;
-            return view('dashboard')->with('branches',$branches);
+        else{
+            return redirect()->route('PosPage');
         }
+
     }
 
 }

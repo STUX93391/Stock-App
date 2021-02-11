@@ -50,8 +50,9 @@
 
                             <select class="form-control" id="type"  name="type" value="{{old('type')}}" >
                                 <option value="" selected hidden class="">Select Account Type</option>
-                                <option>Basic</option>
-                                <option>Premium</option>
+                                <option>Current</option>
+                                <option>Saving</option>
+                                <option>Business</option>
                             </select>
                         </div>
 
@@ -71,7 +72,7 @@
                             @if($errors->has('balance'))
                                 <span class="text-danger">{{ $errors->first('balance')}}</span>
                             @endif
-                            <input type="numeric" size="10" name="balance" class="border form-control" value="{{old('balance')}}" ><br>
+                            <input type="number" size="10"  name="balance" class="border form-control" value="{{old('balance')}}" ><br>
                             <small class="">* Account balance must be at least <strong>Rs:1000</strong></small>
                         </div>
 

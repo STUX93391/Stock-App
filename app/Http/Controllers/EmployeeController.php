@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Account;
+use App\Models\Product;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class EmployeeController extends Controller
 {
@@ -13,7 +17,8 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $employ=auth()->user()->business->employee;
+        $busId=auth()->user()->business->id;
+        $employ=User::where('business_id','=',$busId)->where('status','=','employee')->get();
         return view('EmployeePages.Employees')->with('employ',$employ);
     }
 
@@ -24,7 +29,9 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        //
+        $busId=auth()->user()->business_id;
+        $products=Product::where('business_id','=',$busId)->get();
+        return view('EmployeePages.PoS')->with('products',$products);
     }
 
     /**
@@ -35,7 +42,30 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'CustName'=>'string|nullable',
+            'CustAdd'=>'string|nullable',
+            'product'=>'required|integer',
+            'quantity'=>'required|integer',
+        ]);
+
+        //Increment the balance of business with amount got from product sale
+        $busId=auth()->user()->business_id;
+        Account::find($busId)->increment('balance',$request->price);
+
+        //Decrement the quantity of product
+        Product::find($request->product)->decrement('quantity',$request->quantity);
+
+        //Create transaction for the product sold
+        Transaction::create([
+            'business_id'=>$busId,
+            'action'=>'Product Sold',
+            'description'=>$request->CustName.' '.$request->CustAdd,
+            'quantity'=>$request->quantity,
+            'amount'=>$request->price,
+        ]);
+
+        return redirect()->back()->with('success','Product Sold');
     }
 
     /**
@@ -80,6 +110,21 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $emp=User::find($id);
+
+         //Transaction for employee deletion
+         $busId=auth()->user()->business_id;
+         Transaction::create([
+             'business_id'=>$busId,
+             'action'=>'Employee Removed',
+             'description'=>'Employee Name :'.$emp->name,
+         ]);
+        //Transaction ends....
+
+
+        $emp->delete();
+
+
+        return redirect()->back()->with('sucess','Employee Removed sucessfully');
     }
 }

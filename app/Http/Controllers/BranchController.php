@@ -45,7 +45,8 @@ class BranchController extends Controller
 
         //Create transaction for creation of branch.
         auth()->user()->business->transaction()->Create([
-            'action'=>$request->title.' created',
+            'action'=>'Branch Created',
+            'description'=>'Branch Name: '.$request->title
         ]);
 
         return redirect()->route('dashboard.index')->with('success','Branch created successfully');
