@@ -54,6 +54,9 @@
                                     </div>
                                 <input type="number" class="form-control" id="quantity" name="quantity" value="1">
                                 </div>
+                                @if($errors->has('quantity'))
+                                    <span class="text-danger">{{$errors->first('quantity')}}</span>
+                                @endif
                             </div>
                         </div>
                         {{-- ////*********//// --}}

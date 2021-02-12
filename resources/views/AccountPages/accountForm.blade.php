@@ -50,9 +50,9 @@
 
                             <select class="form-control" id="type"  name="type" value="{{old('type')}}" >
                                 <option value="" selected hidden class="">Select Account Type</option>
-                                <option>Current</option>
-                                <option>Saving</option>
-                                <option>Business</option>
+                                <option>Current Account</option>
+                                <option>Saving Account</option>
+                                <option>Business Account</option>
                             </select>
                         </div>
 

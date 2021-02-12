@@ -22,8 +22,8 @@ class BusinessController extends Controller
             'title'=>'bail|required|string',
             'address'=>'bail|required|string',
             'email'=>'bail|required|email|unique:businesses,email',
-            'contact'=>'bail|required|integer|unique:businesses,contact',
-            'type'=>'bail|required|alpha'
+            'contact'=>'bail|required|numeric|unique:businesses,contact',
+            'type'=>'bail|required|string'
         ]);
 
 

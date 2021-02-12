@@ -42,11 +42,13 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
+        $prod=Product::find($request->product);
+        $qty=$prod->quantity;
         $this->validate($request,[
             'CustName'=>'string|nullable',
             'CustAdd'=>'string|nullable',
             'product'=>'required|integer',
-            'quantity'=>'required|integer',
+            'quantity'=>'required|integer|min:1|max:'.$qty,
         ]);
 
         //Increment the balance of business with amount got from product sale
