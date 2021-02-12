@@ -3,7 +3,7 @@
         <h3 class="">Transactions History</h3>
     </x-slot>
     <div class="container py-3">
-        <table class="table table-hover " id="transactionTable">
+        <table class="table text-center table-hover" id="transactionTable">
             <thead class="thead-dark">
                 <th>#</th>
                 <th>Action</th>
@@ -19,7 +19,11 @@
                         <td>{{Str::title($tran->action)}}</td>
                         <td>{{Str::title($tran->description)}}</td>
                         <td>{{$tran->quantity}}</td>
-                        <td>Rs {{$tran->amount}}</td>
+                        <td>
+                            @if($tran->amount!=null)
+                                Rs {{$tran->amount}}
+                            @endif
+                        </td>
                         <td>{{$tran->created_at}}</td>
                     </tr>
                 @endforeach

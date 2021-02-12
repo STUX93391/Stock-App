@@ -10,7 +10,7 @@
 
     <div class="container py-3">
         @if($employ->count())
-            <table class="table table-hover">
+            <table class="table text-center table-hover">
                 <thead class="thead-dark">
                     <th>#</th>
                     <th>Name</th>

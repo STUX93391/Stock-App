@@ -5,7 +5,7 @@
 
     <div class="container py-3">
         @if($products->count())
-            <table class="table table-hover" id="outOfStockTable">
+            <table class="table text-center table-hover" id="outOfStockTable">
                 <thead class="thead-dark">
                     <th class="">#</th>
                     <th class="">Title</th>

@@ -12,7 +12,7 @@
   <div class="py-3">
     <div class="container">
         @if($prods->count())
-            <table class="table table-hover " id="productsTable">
+            <table class="table text-center table-hover " id="productsTable">
                 <thead class="thead-dark">
                     <th class="">ID</th>
                     <th class="">Title</th>

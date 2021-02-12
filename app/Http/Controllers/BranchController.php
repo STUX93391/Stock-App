@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Branch;
 use Illuminate\Http\Request;
-use App\Models\User;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Str;
 
@@ -34,22 +33,29 @@ class BranchController extends Controller
             'code'=>'bail|required|string',
         ]);
 
-        $userId=auth()->user()->id;
-        $bus=User::find($userId)->business;
-        $bus->branch()->Create([
-            'br_title'=>Str::lower($request->title),
-            'address'=>$request->address,
-            'code'=>Str::upper($request->code)
-        ]);
-        $bus->refresh();
+        $bus=auth()->user()->business;
+        $branch=$bus->branch;
+        //Limit the number of branches for a business to maximum 10.
+        if($branch->count()<10){
+            $bus->branch()->Create([
+                'br_title'=>Str::lower($request->title),
+                'address'=>$request->address,
+                'code'=>Str::upper($request->code)
+            ]);
+            $bus->refresh();
 
-        //Create transaction for creation of branch.
-        auth()->user()->business->transaction()->Create([
-            'action'=>'Branch Created',
-            'description'=>'Branch Name: '.$request->title
-        ]);
+            //Create transaction for creation of branch.
+            auth()->user()->business->transaction()->Create([
+                'action'=>'Branch Created',
+                'description'=>'Branch Name: '.$request->title
+            ]);
 
-        return redirect()->route('dashboard.index')->with('success','Branch created successfully');
+            return redirect()->route('dashboard.index')->with('success','Branch created successfully');
+        }
+        else{
+            return redirect()->route('dashboard.index')->with('warning','Maximun branch limit reached.');
+        }
+
     }
 
     /**

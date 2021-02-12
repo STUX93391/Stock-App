@@ -62,7 +62,7 @@ class EmployeeController extends Controller
         Transaction::create([
             'business_id'=>$busId,
             'action'=>'Product Sold',
-            'description'=>$request->CustName.' '.$request->CustAdd,
+            'description'=>'Product: '.$prod->pr_title.' Customer: '.$request->CustName.' Address: '.$request->CustAdd,
             'quantity'=>$request->quantity,
             'amount'=>$request->price,
         ]);

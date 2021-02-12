@@ -4,7 +4,7 @@
     </x-slot>
     <div class="container py-3">
         @if($prods->count())
-            <table class="table table-hover" id="stockTable">
+            <table class="table text-center table-hover" id="stockTable">
                 <thead class="thead-dark">
                     <th class=""> #</th>
                     <th class="">Branch ID</th>
