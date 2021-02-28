@@ -117,7 +117,8 @@ class BranchController extends Controller
 
             //Create transaction for deleting the branch.
             auth()->user()->business->transaction()->create([
-                'action'=>$branch->br_title.' deleted',
+                'action'=>'Branch deleted',
+                'description'=>'Branch Name: '.$branch->br_title,
             ]);
 
             return redirect()->route('dashboard.index')->with('success',Str::ucfirst($branch->br_title).' deleted successfully');
