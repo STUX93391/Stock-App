@@ -165,7 +165,7 @@
                 @endif
             @else
                 <div class="flex items-center flex-shrink-0">
-                    <h3 ><strong>&nbsp Stock Managment App</strong></h3>
+                    <h3 ><strong>&nbsp Stock Management System</strong></h3>
                 </div>
             @endif
 

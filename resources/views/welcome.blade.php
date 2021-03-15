@@ -15,7 +15,7 @@
     <body style="background-color:#f1f0f0">
         <div class="px-4 py-5">
             <header >
-                <h1 class="text-danger"><strong>Stock Managment App</strong>
+                <h1 class="text-danger"><strong>Stock Managment System</strong>
                     <div class="float-right">
                         @if (Route::has('login'))
                             <div class="">
@@ -62,7 +62,7 @@
             </footer>
 
            <div class="text-center">
-                <small> Copyright © Stock Managment App 2020. All right reserved. </small>
+                <small> Copyright © Stock Management System 2020. All right reserved. </small>
            </div>
            <!--/.footer-bottom-->
     </body>
